@@ -9,10 +9,10 @@ jobs:
     - name: Checkout src
       uses: actions/checkout@v4
 
-    - name: Set up JDK 23
+    - name: Set up JDK 
       uses: actions/setup-java@v4
       with:
-        java-version: '23'
+        java-version: '17'
         distribution: 'temurin'
 
     - name: Change wrapper permissions
@@ -39,7 +39,19 @@ jobs:
       run: |
         install -m 600 -D /dev/null ~/.ssh/id_ed25519
         echo "$DROPLET_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-        ssh -o StrictHostKeyChecking=no root@$DROPLET_IP "echo 'Hello from GitHub Actions!' > ~/file.txt"
+        ssh -o StrictHostKeyChecking=no root@$DROPLET_IP "
+        echo 'Install JDK...'; 
+        apt update && apt-get install -y openjdk-17-jdk-headless;
+        echo 'Downloading the latest JAR...'; 
+        curl -L -o /opt/webapp/sample-0.0.1-SNAPSHOT.jar \
+        https://github.com/JacksonKuo/app-springboot/releases/download/latest/sample-0.0.1-SNAPSHOT.jar &&
+        echo 'Restarting the web application...'; 
+        systemctl stop webapp || true;
+        systemd-run --unit=webapp --description='Transient Web App Service' --property=Restart=always java -jar /opt/webapp/sample-0.0.1-SNAPSHOT.jar"
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
         DROPLET_SSH_PRIVATE_KEY: ${{ secrets.DROPLET_SSH_PRIVATE_KEY }}
+
+
+    
+
