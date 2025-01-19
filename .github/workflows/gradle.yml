@@ -29,8 +29,8 @@ jobs:
 
     - name: SSH
       run: |
-        install -m 600 -D /dev/null ~/.ssh/id_ed25519_droplet
-        echo "$SSH_PRIVATE_KEY_DROPLET" > ~/.ssh/id_ed25519_droplet
+        install -m 600 -D /dev/null ~/.ssh/id_ed25519
+        echo "$SSH_PRIVATE_KEY_DROPLET" > ~/.ssh/id_ed25519
         ssh -o StrictHostKeyChecking=no root@$DROPLET_IP "echo 'Hello from GitHub Actions!' > ~/file.txt"
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
