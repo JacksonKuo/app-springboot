@@ -1,6 +1,8 @@
-FROM gradle:8.12.0-jdk23-corretto AS build
+FROM openjdk:17-jdk-slim
 
 WORKDIR /app
-RUN git clone https://github.com/JacksonKuo/app-springboot.git .
+COPY . /app
 RUN chmod +x gradlew
 RUN ./gradlew build --info -Dorg.gradle.jvmargs="-Xmx512m -XX:MaxMetaspaceSize=512m" 
+EXPOSE 8080
+CMD ["java", "-jar", "build/libs/sample-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=local"]
