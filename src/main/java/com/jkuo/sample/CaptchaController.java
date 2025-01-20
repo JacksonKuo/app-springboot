@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/captcha")
+@RequestMapping("/captcha" produces = "text/html")
 public class CaptchaController {
 
 	@GetMapping("")
 	public String index() {
-		return "Captcha";
+		return "<html><body><h1>Captcha</h1></body></html>"";
 	}
 
 }
