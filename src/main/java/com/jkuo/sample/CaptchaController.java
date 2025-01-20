@@ -10,7 +10,7 @@ public class CaptchaController {
 
 	@GetMapping("")
 	public String index() {
-		return "<html><body><h1>Captcha</h1></body></html>"";
+		return "<html><body><h1>Captcha</h1></body></html>";
 	}
 
 }
