@@ -68,7 +68,7 @@ public class CaptchaController {
         final String name = jsonObject.get("success").getAsString();
 
         if (name.equals("true")) {
-            return "Captcha submitted!";
+            return "Captcha successful!";
         }
         else {
             return "Captcha submission failed!";
