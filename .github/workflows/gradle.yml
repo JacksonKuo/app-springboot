@@ -15,11 +15,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Change wrapper permissions
-      run: chmod +x ./gradlew
-
     - name: Build with Gradle
-      run: ./gradlew build
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build
 
     - name: Publish to Latest Release
       run: |
@@ -37,14 +36,19 @@ jobs:
 
     - name: SSH
       run: |
+        echo 'Setup SSH...'; 
         install -m 600 -D /dev/null ~/.ssh/id_ed25519
         echo "$DROPLET_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
         ssh -o StrictHostKeyChecking=no root@$DROPLET_IP "
+        
         echo 'Install JDK...'; 
         apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless;
         echo 'Downloading the latest JAR...'; 
+        
+        echo 'Downloading the latest JAR...';
         curl -L -o /root/sample-0.0.1-SNAPSHOT.jar \
         https://github.com/JacksonKuo/app-springboot/releases/download/latest/sample-0.0.1-SNAPSHOT.jar &&
+        
         echo 'Restarting the web application...'; 
         systemctl stop webapp || true;
         systemctl reset-failed webapp || true;
