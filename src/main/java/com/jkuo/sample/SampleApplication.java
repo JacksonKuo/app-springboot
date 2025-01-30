@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
+import com.jkuo.sample.component.*;
+
 @SpringBootApplication
 public class SampleApplication {
 

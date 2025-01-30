@@ -1,0 +1,16 @@
+replicaCount: 1
+
+appName: springboot
+
+containerName: springboot-container
+
+image:
+  repository: springboot
+  tag: latest
+  pullPolicy: Never
+
+service:
+  type: LoadBalancer
+  port: 8087
+  targetPort: 8087
+

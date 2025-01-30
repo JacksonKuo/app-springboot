@@ -1,4 +1,4 @@
-package com.jkuo.sample;
+package com.jkuo.sample.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

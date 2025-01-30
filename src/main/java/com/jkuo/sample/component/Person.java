@@ -1,4 +1,4 @@
-package com.jkuo.sample;
+package com.jkuo.sample.component;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
