@@ -37,6 +37,21 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Log in to GHCR
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ghcr.io/jacksonkuo/springboot:latest .
+
+    - name: Push Docker image to GHCR
+      run: docker push ghcr.io/jacksonkuo/springboot:latest
+
+    - name: Make GHCR image public using gh CLI
+      run: |
+        gh api --method PATCH "/user/packages/container/springboot/visibility" -f visibility="public"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: SSH
       run: |
         echo 'Setup SSH...'; 
@@ -47,15 +62,19 @@ jobs:
         echo 'Install JDK...'; 
         apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless;
         echo 'Downloading the latest JAR...'; 
+
+        echo 'Check for K3s...';
+        if command -v k3s &> /dev/null; then
+          echo "K3s is already installed."
+        else
+          echo 'Install K3s...'; 
+          curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
+        fi
         
         echo 'Downloading the latest JAR...';
         curl -L -o /root/sample-0.0.1-SNAPSHOT.jar \
         https://github.com/JacksonKuo/app-springboot/releases/download/latest/sample-0.0.1-SNAPSHOT.jar &&
         
-        echo 'Restarting the web application...'; 
-        systemctl stop webapp || true;
-        systemctl reset-failed webapp || true;
-        systemd-run --unit=webapp --description='Transient Web App Service' --setenv=HCAPTCHA_SECRET=$HCAPTCHA_SECRET --property=Restart=always java -jar /root/sample-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod"
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
         DROPLET_SSH_PRIVATE_KEY: ${{ secrets.DROPLET_SSH_PRIVATE_KEY }}

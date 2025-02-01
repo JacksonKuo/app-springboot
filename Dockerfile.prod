@@ -1,0 +1,17 @@
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+COPY sample-0.0.1-SNAPSHOT.jar /app
+
+RUN apt update
+RUN apt-get -y install certbot
+RUN certbot certonly --standalone -d bakacore.com --agree-tos --register-unsafely-without-email
+RUN sudo openssl pkcs12 -export \
+    -in /etc/letsencrypt/live/bakacore.com/fullchain.pem \
+    -inkey /etc/letsencrypt/live/bakacore.com/privkey.pem \
+    -out /etc/letsencrypt/live/bakacore.com/keystore.p12 \
+    -name springboot \
+    -password pass:foobar
+
+EXPOSE 8087
+CMD ["java", "-jar", "-Xms128m", "-Xmx256m", "sample-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=prod"]
