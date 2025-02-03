@@ -56,29 +56,29 @@ jobs:
         install -m 600 -D /dev/null ~/.ssh/id_ed25519
         echo "$DROPLET_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
 
-        ssh -o StrictHostKeyChecking=no root@$DROPLET_IP << 'EOF'
-        echo 'Install JDK...'
-        apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
-        echo 'Downloading the latest JAR...'
+        ssh -o StrictHostKeyChecking=no root@$DROPLET_IP <<EOF
+          echo 'Install JDK...'
+          apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
+          echo 'Downloading the latest JAR...'
 
-        echo 'Install helm...'
-        curl -LO https://git.io/get_helm.sh
-        chmod 700 get_helm.sh
-        ./get_helm.sh
+          echo 'Install helm 3...'
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
 
-        echo 'Check for K3s...'
-        if k3s --version &> /dev/null; then
-          echo "K3s is already installed."
-        else
-          echo 'Install K3s...'
-          curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
-        fi
+          echo 'Check for K3s...'
+          if k3s --version &> /dev/null; then
+            echo "K3s is already installed."
+          else
+            echo 'Install K3s...'
+            curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
+          fi
 
-        echo 'Download helm chart...'
-        curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
-        
-        echo 'Deploy service...'
-        helm install springboot springboot-chart-0.0.1.tgz
+          echo 'Download helm chart...'
+          curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
+          
+          echo 'Deploy service...'
+          helm install springboot springboot-chart-0.0.1.tgz"
         EOF       
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
