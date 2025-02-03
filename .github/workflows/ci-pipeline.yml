@@ -23,6 +23,10 @@ jobs:
         chmod +x ./gradlew
         ./gradlew build
 
+    - name: Build Helm Chart
+      run: | 
+        helm package ./springboot-chart
+
     - name: Publish to Latest Release
       run: |
         if gh release view latest; then
@@ -30,9 +34,9 @@ jobs:
           gh release delete latest --yes
         fi
 
-        gh release create latest build/libs/sample-0.0.1-SNAPSHOT.jar \
+        gh release create latest springboot-chart-0.0.1.tgz \
           --title "Latest Release" \
-          --notes "This is the latest build of the application." \
+          --notes "This is the latest helm chart" \
           --prerelease
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -70,6 +74,7 @@ jobs:
           echo 'Install K3s...'; 
           curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
         fi
+
 
         
       env:
