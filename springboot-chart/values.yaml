@@ -7,7 +7,7 @@ containerName: springboot-container
 image:
   repository: ghcr.io/jacksonkuo/springboot
   tag: latest
-  pullPolicy: IfNotPresent  # Change from Never to allow pulling
+  pullPolicy: Always
 
 service:
   type: LoadBalancer
