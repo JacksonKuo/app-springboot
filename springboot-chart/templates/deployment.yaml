@@ -18,3 +18,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          volumeMounts:
+            - name: keystore-volume
+              mountPath: /etc/letsencrypt/live/bakacore.com 
+              readOnly: true 
+      volumes:
+        - name: keystore-volume
+          hostPath:
+            path: /etc/letsencrypt/live/bakacore.com
+            type: Directory
