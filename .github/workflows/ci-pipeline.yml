@@ -50,12 +50,6 @@ jobs:
     - name: Push Docker image to GHCR
       run: docker push ghcr.io/jacksonkuo/springboot:latest
 
-    - name: Make GHCR image public using gh CLI
-      run: |
-        gh api --method PATCH "/user/packages/container/springboot/visibility" -f visibility="public"
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: SSH
       run: |
         echo 'Setup SSH...'; 
@@ -75,7 +69,9 @@ jobs:
           curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
         fi
 
-
+        curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
+        
+        helm install springboot springboot-chart-0.0.1.tgz        
         
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
