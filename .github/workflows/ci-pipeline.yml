@@ -58,8 +58,13 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no root@$DROPLET_IP << 'EOF'
         echo 'Install JDK...'
-        apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless && apt-get -qq install -y helm
+        apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
         echo 'Downloading the latest JAR...'
+
+        echo 'Install helm...'
+        curl -LO https://git.io/get_helm.sh
+        chmod 700 get_helm.sh
+        ./get_helm.sh
 
         echo 'Check for K3s...'
         if k3s --version &> /dev/null; then
