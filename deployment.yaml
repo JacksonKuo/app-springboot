@@ -17,6 +17,14 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 8087
+          volumeMounts:
+            - name: keystore-volume
+              mountPath: /etc/letsencrypt/live/bakacore.com
+      volumes:
+        - name: keystore-volume
+          hostPath:
+            path: /etc/letsencrypt/live/bakacore.com
+            type: Directory
 ---
 apiVersion: v1
 kind: Service

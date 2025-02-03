@@ -41,7 +41,7 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
     - name: Build Docker image
-      run: docker build -t ghcr.io/jacksonkuo/springboot:latest .
+      run: docker build -t ghcr.io/jacksonkuo/springboot:latest -f Dockerfile.prod .
 
     - name: Push Docker image to GHCR
       run: docker push ghcr.io/jacksonkuo/springboot:latest
@@ -70,10 +70,7 @@ jobs:
           echo 'Install K3s...'; 
           curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
         fi
-        
-        echo 'Downloading the latest JAR...';
-        curl -L -o /root/sample-0.0.1-SNAPSHOT.jar \
-        https://github.com/JacksonKuo/app-springboot/releases/download/latest/sample-0.0.1-SNAPSHOT.jar &&
+
         
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
