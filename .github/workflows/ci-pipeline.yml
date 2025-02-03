@@ -47,15 +47,16 @@ jobs:
     - name: Build Docker image
       run: docker build -t ghcr.io/jacksonkuo/springboot:latest -f Dockerfile.prod .
 
-    - name: Delete image tagged latest 
+    - name: Push Docker image to GHCR
+      run: docker push ghcr.io/jacksonkuo/springboot:latest
+
+        - name: Delete image tagged latest 
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        LATEST_ID=$(gh api --paginate "/user/packages/container/springboot/versions" --jq 'sort_by(.updated_at) | last | .id') 
-        gh api --method DELETE "/user/packages/container/springboot/versions/$LATEST_ID"
-
-    - name: Push Docker image to GHCR
-      run: docker push ghcr.io/jacksonkuo/springboot:latest
+        for id in $(gh api --paginate "/user/packages/container/springboot/versions" --jq '.[] | select(.metadata.container.tags == []) | .id'); do
+          gh api --method DELETE "/user/packages/container/springboot/versions/$id"
+        done
 
     - name: SSH
       run: |
