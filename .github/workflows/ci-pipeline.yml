@@ -62,7 +62,7 @@ jobs:
         echo 'Downloading the latest JAR...'
 
         echo 'Check for K3s...'
-        if command -v k3s &> /dev/null; then
+        if k3s --version &> /dev/null; then
           echo "K3s is already installed."
         else
           echo 'Install K3s...'
@@ -72,7 +72,7 @@ jobs:
         echo 'Download helm chart...'
         curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
         
-        echo 'Deploy serivce...'
+        echo 'Deploy service...'
         helm install springboot springboot-chart-0.0.1.tgz;       
         
       env:
