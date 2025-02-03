@@ -73,7 +73,7 @@ jobs:
           curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
           
           echo 'Deploy service...'
-          helm install springboot springboot-chart-0.0.1.tgz"
+          helm install springboot springboot-chart-0.0.1.tgz
         EOF       
         
       env:
