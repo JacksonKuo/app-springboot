@@ -13,7 +13,13 @@ spec:
     spec:
       containers:
         - name: springboot-container
-          image: springboot
+          env:
+            - name: HCAPTCHA_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hcaptcha-secret
+                  key: HCAPTCHA_SECRET
+          image: ghcr.io/jacksonkuo/springboot:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8087

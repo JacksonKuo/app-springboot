@@ -56,7 +56,7 @@ jobs:
         install -m 600 -D /dev/null ~/.ssh/id_ed25519
         echo "$DROPLET_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
 
-        ssh -o StrictHostKeyChecking=no root@$DROPLET_IP <<EOF
+        ssh -o StrictHostKeyChecking=no root@$DROPLET_IP "
           echo 'Install JDK...'
           apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
           echo 'Downloading the latest JAR...'
@@ -71,15 +71,15 @@ jobs:
             echo "K3s is already installed."
           else
             echo 'Install K3s...'
-            curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--disable metrics-server --disable traefik" sh -
+            curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--disable metrics-server --disable traefik' sh -
           fi
 
           echo 'Download helm chart...'
           curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
-          
+          export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+
           echo 'Deploy service...'
-          helm install springboot springboot-chart-0.0.1.tgz
-        EOF       
+          helm install springboot springboot-chart-0.0.1.tgz"      
       env:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
         DROPLET_SSH_PRIVATE_KEY: ${{ secrets.DROPLET_SSH_PRIVATE_KEY }}
