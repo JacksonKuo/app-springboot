@@ -61,7 +61,7 @@ jobs:
           apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
           echo 'Downloading the latest JAR...'
 
-          echo 'Install helm 3...'
+          echo 'Install Helm 3...'
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
           chmod 700 get_helm.sh
           ./get_helm.sh
@@ -74,7 +74,7 @@ jobs:
             curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--disable metrics-server --disable traefik' sh -
           fi
 
-          echo 'Download helm chart...'
+          echo 'Download Helm chart...'
           curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
