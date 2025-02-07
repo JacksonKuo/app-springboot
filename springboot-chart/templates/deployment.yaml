@@ -22,6 +22,10 @@ spec:
             - name: keystore-volume
               mountPath: /etc/letsencrypt/live/bakacore.com 
               readOnly: true 
+        - name: redis
+          image: redis:latest
+          ports:
+            - containerPort: 6379
       volumes:
         - name: keystore-volume
           hostPath:
