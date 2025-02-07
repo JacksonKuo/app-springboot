@@ -1,0 +1,3 @@
+enableVolumeMounts: false
+
+springProfile: localk8

@@ -18,16 +18,52 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
+          env: 
+            - name: SPRING_PROFILE
+              value: {{ .Values.springProfile }}
           volumeMounts:
+            {{- if .Values.enableVolumeMounts }}
             - name: keystore-volume
-              mountPath: /etc/letsencrypt/live/bakacore.com 
-              readOnly: true 
-        - name: redis
-          image: redis:latest
-          ports:
-            - containerPort: 6379
+              mountPath: /etc/letsencrypt/live/bakacore.com
+              readOnly: true
+            {{- end }}
+      {{- if .Values.enableVolumeMounts }}
       volumes:
         - name: keystore-volume
           hostPath:
             path: /etc/letsencrypt/live/bakacore.com
             type: Directory
+      {{- end }}
+
+# Redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis
