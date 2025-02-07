@@ -53,7 +53,7 @@ jobs:
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
     - name: Build Docker image
-      run: docker build -t ghcr.io/jacksonkuo/springboot:latest -f Dockerfile.prod .
+      run: docker build -t ghcr.io/jacksonkuo/springboot:latest .
 
     - name: Push Docker image to GHCR
       run: docker push ghcr.io/jacksonkuo/springboot:latest

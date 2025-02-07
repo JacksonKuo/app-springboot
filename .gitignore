@@ -38,3 +38,6 @@ out/
 
 ### Helm ###
 *.tgz
+
+### Redis ###
+*.rdb

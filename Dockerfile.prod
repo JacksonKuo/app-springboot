@@ -1,6 +1,0 @@
-FROM openjdk:17-jdk-alpine
-
-WORKDIR /app
-COPY build/libs/sample-0.0.1-SNAPSHOT.jar /app
-EXPOSE 8087
-CMD ["java", "-jar", "-Xms128m", "-Xmx256m", "sample-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=prod"]
