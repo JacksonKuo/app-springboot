@@ -37,6 +37,7 @@ metadata:
   name: springboot-service
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   selector:
     app: springboot
   ports:
