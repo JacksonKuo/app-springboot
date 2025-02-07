@@ -54,6 +54,7 @@ spec:
       containers:
         - name: redis
           image: redis:latest
+          command: ["redis-server", "--maxmemory", "50mb"]
           ports:
             - containerPort: 6379
 ---
