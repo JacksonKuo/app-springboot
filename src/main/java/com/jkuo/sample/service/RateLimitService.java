@@ -25,8 +25,8 @@ public class RateLimitService {
         RRateLimiter rateLimiter = redissonClient.getRateLimiter(key);
 
         if (!rateLimiter.isExists()) {
-            rateLimiter.trySetRate(RateType.PER_CLIENT, 3, 1, RateIntervalUnit.MINUTES);
-            redissonClient.getBucket(key).expire(2, TimeUnit.MINUTES); 
+            rateLimiter.trySetRate(RateType.OVERALL, 3, 1, RateIntervalUnit.MINUTES);
+            redissonClient.getBucket(key).expire(1, TimeUnit.MINUTES); 
         }
         return rateLimiter;
     }
