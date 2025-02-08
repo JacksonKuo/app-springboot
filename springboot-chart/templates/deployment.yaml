@@ -21,6 +21,11 @@ spec:
           env: 
             - name: SPRING_PROFILE
               value: {{ .Values.springProfile }}
+            - name: HCAPTCHA_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hcaptcha-secret
+                  key: HCAPTCHA_SECRET
           volumeMounts:
             {{- if .Values.enableVolumeMounts }}
             - name: keystore-volume
