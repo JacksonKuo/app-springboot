@@ -94,6 +94,19 @@ jobs:
           curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
+          echo 'Inject secrets...'
+          kubectl delete secret hcaptcha-secret --ignore-not-found
+          kubectl create secret generic hcaptcha-secret --from-literal=HCAPTCHA_SECRET='$HCAPTCHA_SECRET'
+
+          kubectl delete secret verify-service-sid --ignore-not-found
+          kubectl create secret generic verify-service-sid --from-literal=VERIFY_SERVICE_SID='$VERIFY_SERVICE_SID'
+
+          kubectl delete secret twilio-account-sid --ignore-not-found
+          kubectl create secret generic twilio-account-sid --from-literal=TWILIO_ACCOUNT_SID='$TWILIO_ACCOUNT_SID'
+
+          kubectl delete secret twilio-auth-token --ignore-not-found
+          kubectl create secret generic twilio-auth-token --from-literal=TWILIO_AUTH_TOKEN='$TWILIO_AUTH_TOKEN'
+
           echo 'Deploy Spring Boot service...'
           helm upgrade --install springboot springboot-chart-0.0.1.tgz
           kubectl rollout restart deployment springboot-app
@@ -102,6 +115,9 @@ jobs:
         DROPLET_IP: ${{ secrets.DROPLET_IP }}
         DROPLET_SSH_PRIVATE_KEY: ${{ secrets.DROPLET_SSH_PRIVATE_KEY }}
         HCAPTCHA_SECRET: ${{ secrets.HCAPTCHA_SECRET }}
+        VERIFY_SERVICE_SID: ${{ secrets.VERIFY_SERVICE_SID }}
+        TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+        TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
 
 
     
