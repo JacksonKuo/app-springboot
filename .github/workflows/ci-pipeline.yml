@@ -97,13 +97,10 @@ jobs:
           echo 'Inject secrets...'
           kubectl delete secret hcaptcha-secret --ignore-not-found
           kubectl create secret generic hcaptcha-secret --from-literal=HCAPTCHA_SECRET='$HCAPTCHA_SECRET'
-
           kubectl delete secret verify-service-sid --ignore-not-found
           kubectl create secret generic verify-service-sid --from-literal=VERIFY_SERVICE_SID='$VERIFY_SERVICE_SID'
-
           kubectl delete secret twilio-account-sid --ignore-not-found
           kubectl create secret generic twilio-account-sid --from-literal=TWILIO_ACCOUNT_SID='$TWILIO_ACCOUNT_SID'
-
           kubectl delete secret twilio-auth-token --ignore-not-found
           kubectl create secret generic twilio-auth-token --from-literal=TWILIO_AUTH_TOKEN='$TWILIO_AUTH_TOKEN'
 
