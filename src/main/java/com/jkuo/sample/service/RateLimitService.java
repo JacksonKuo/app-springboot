@@ -22,14 +22,9 @@ public class RateLimitService {
 
     public RRateLimiter getRateLimiter(String clientIp) {
         String key = "rate-limiter:" + clientIp; 
-        //getRateLimiter only returns a reference, doesn't actually query redis
         RRateLimiter rateLimiter = redissonClient.getRateLimiter(key);
-
-        //isExists() queries redis to check if the key exists
-        if (!rateLimiter.isExists()) {
-            rateLimiter.trySetRate(RateType.OVERALL, 3, 1, RateIntervalUnit.MINUTES);
-            redissonClient.getBucket(key).expire(1, TimeUnit.MINUTES); 
-        }
+        rateLimiter.trySetRate(RateType.OVERALL, 3, 1, RateIntervalUnit.MINUTES);
+        redissonClient.getBucket(key).expire(2, TimeUnit.MINUTES); 
         return rateLimiter;
     }
 }
