@@ -26,6 +26,21 @@ spec:
                 secretKeyRef:
                   name: hcaptcha-secret
                   key: HCAPTCHA_SECRET
+            - name: VERIFY_SERVICE_SID
+              valueFrom:
+                secretKeyRef:
+                  name: verify-service-sid
+                  key: VERIFY_SERVICE_SID
+            - name: TWILIO_ACCOUNT_SID
+              valueFrom:
+                secretKeyRef:
+                  name: twilio-account-sid
+                  key: TWILIO_ACCOUNT_SID
+            - name: TWILIO_AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: twilio-auth-token
+                  key: TWILIO_AUTH_TOKEN
           volumeMounts:
             {{- if .Values.enableVolumeMounts }}
             - name: keystore-volume
