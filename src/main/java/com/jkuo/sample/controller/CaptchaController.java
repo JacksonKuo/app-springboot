@@ -29,7 +29,7 @@ public class CaptchaController {
     private String hcaptchaSecret;
 
 	@GetMapping("")
-	public String index() {
+	public String captchaform() {
 		return """
         <html>
         <head>

@@ -6,10 +6,16 @@
 .PHONY: test build docker cluster secrets deploy
 
 test:
+	redis-server --daemonize yes 
+	sleep 1
 	./gradlew test --info -Dspring.profiles.active=local
+	redis-cli shutdown
 
 build:
+	redis-server --daemonize yes 
+	sleep 1
 	./gradlew build -Dspring.profiles.active=localk8
+	redis-cli shutdown
 
 docker:
 	docker build -t springboot --build-arg BASE_IMAGE="openjdk:17-jdk-slim" .
@@ -44,7 +50,7 @@ log:
 	kubectl describe pod -l app=springboot
 	kubectl logs -l app=springboot --tail=100
 
-uninstall:
+delete:
 	k3d cluster delete local-cluster
 
-all: test build docker cluster secrets deploy
+all: build docker cluster secrets deploy
