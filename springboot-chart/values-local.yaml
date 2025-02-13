@@ -6,3 +6,8 @@ image:
 enableVolumeMounts: false
 
 springProfile: localk8
+
+smokescreenImage:
+  repository: smokescreen
+  tag: latest
+  pullPolicy: Never

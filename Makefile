@@ -19,6 +19,7 @@ build:
 
 docker:
 	docker build -t springboot --build-arg BASE_IMAGE="openjdk:17-jdk-slim" .
+	docker build -t smokescreen -f /Users/jacksonkuo/workspace/app-smokescreen/Dockerfile /Users/jacksonkuo/workspace/app-smokescreen/
 
 cluster:
 	k3d cluster create local-cluster --port 8087:8087@loadbalancer
@@ -41,6 +42,7 @@ secrets-check:
 
 deploy:
 	k3d image import springboot --cluster local-cluster
+	k3d image import smokescreen --cluster local-cluster
 	helm install springboot ./springboot-chart -f ./springboot-chart/values-local.yaml
 
 restart:
@@ -49,6 +51,9 @@ restart:
 log:
 	kubectl describe pod -l app=springboot
 	kubectl logs -l app=springboot --tail=100
+
+k3d-log:
+	docker exec k3d-local-cluster-server-0 crictl images
 
 delete:
 	k3d cluster delete local-cluster

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: smokescreen
+spec:
+  ports:
+    - port: 4750
+      targetPort: 4750
+  selector:
+    app: smokescreen

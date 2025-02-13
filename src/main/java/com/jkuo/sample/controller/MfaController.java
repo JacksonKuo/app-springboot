@@ -15,8 +15,6 @@ import com.twilio.Twilio;
 import com.twilio.rest.verify.v2.service.Verification;
 import com.twilio.rest.verify.v2.service.VerificationCheck;
 
-
-
 @RestController
 public class MfaController {
 
@@ -60,7 +58,7 @@ public class MfaController {
                 .build();
             }
             else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(verification.getStatus());
+                return ResponseEntity.ok(verification.getStatus());
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("mfa failed");

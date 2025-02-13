@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smokescreen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smokescreen
+  template:
+    metadata:
+      labels:
+        app: smokescreen
+    spec:
+      containers:
+        - name: smokescreen
+          image: "{{ .Values.smokescreenImage.repository }}:{{ .Values.smokescreenImage.tag }}"
+          imagePullPolicy: "{{ .Values.smokescreenImage.pullPolicy }}"
+          ports:
+            - containerPort: 4750
