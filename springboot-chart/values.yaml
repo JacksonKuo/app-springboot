@@ -17,3 +17,8 @@ service:
 enableVolumeMounts: true
 
 springProfile: prod
+
+smokescreenImage:
+  repository: ghcr.io/jacksonkuo/smokescreen
+  tag: latest
+  pullPolicy: Always
