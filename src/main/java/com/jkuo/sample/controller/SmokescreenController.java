@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jkuo.sample.service.SmokescreenService;
+import com.jkuo.sample.component.WebProxy;
 
 import reactor.core.publisher.Mono;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +16,11 @@ import org.springframework.http.HttpHeaders;
 @RequestMapping(value = "/smokescreen")
 public class SmokescreenController {
 
-    private final SmokescreenService smokescreenService;
+    // doesn't need @Autowired annotation since only one constructor and autowiring is implicit
+    private final WebProxy webProxy;
 
-    public SmokescreenController(SmokescreenService smokescreenService) {
-        this.smokescreenService = smokescreenService;
+    public SmokescreenController(WebProxy webProxy) {
+        this.webProxy = webProxy;
     }
 
     @GetMapping(value = "", produces = "text/html")
@@ -44,7 +45,7 @@ public class SmokescreenController {
 
     @PostMapping(value = "")
     public Mono<ResponseEntity<String>> retrieveUrl(@RequestParam String url) {
-        return smokescreenService.retrieveUrl(url)
+        return webProxy.retrieveUrl(url)
             .map(rawHtml -> ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_TYPE, "text/plain")
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
