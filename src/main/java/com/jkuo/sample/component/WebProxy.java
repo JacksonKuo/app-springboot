@@ -3,10 +3,6 @@ package com.jkuo.sample.component;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.netty.http.client.HttpClient;
-import reactor.netty.transport.ProxyProvider;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import java.net.InetSocketAddress;
 
 import reactor.core.publisher.Mono;
 

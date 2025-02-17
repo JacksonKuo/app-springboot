@@ -6,7 +6,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import java.net.InetSocketAddress;
 
 @Configuration
 public class WebClientConfig {
@@ -15,7 +14,8 @@ public class WebClientConfig {
     public HttpClient httpClient() {
         return HttpClient.create()
         .proxy(proxy -> proxy.type(ProxyProvider.Proxy.HTTP)
-        .address(new InetSocketAddress("smokescreen", 4750))); 
+        .host("smokescreen")
+        .port(4750));
     }
 
     @Bean
