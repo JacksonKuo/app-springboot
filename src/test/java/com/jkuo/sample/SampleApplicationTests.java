@@ -9,6 +9,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("local")
 class SampleApplicationTests {
 
+	// test only fails if the context fails to load
 	@Test
 	void contextLoads() {
 	}

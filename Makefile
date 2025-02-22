@@ -6,10 +6,10 @@
 .PHONY: test build docker cluster secrets deploy
 
 test:
-	redis-server --daemonize yes 
-	sleep 1
+# redis-server --daemonize yes 
+# sleep 1
 	./gradlew test --info -Dspring.profiles.active=local
-	redis-cli shutdown
+#redis-cli shutdown
 
 build:
 	redis-server --daemonize yes 
