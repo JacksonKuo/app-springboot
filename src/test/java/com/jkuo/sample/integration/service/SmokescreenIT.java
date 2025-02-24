@@ -38,8 +38,8 @@ public class SmokescreenIT {
         try {
             smokescreen.start();
             Integer smokescreenPort = smokescreen.getMappedPort(4750);
-            System.setProperty("smokescreen.host", "localhost");
-            System.setProperty("smokescreen.port", smokescreenPort.toString());
+            System.setProperty("spring.smokescreen.host", "localhost");
+            System.setProperty("spring.smokescreen.port", smokescreenPort.toString());
             System.err.println("Smokescreen container started.");
         } catch (Exception e) {
             System.err.println("Failed to start Smokescreen container: " + e.getMessage());

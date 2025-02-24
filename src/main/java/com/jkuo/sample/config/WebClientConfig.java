@@ -11,10 +11,10 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 @Configuration
 public class WebClientConfig {
 
-    @Value("${smokescreen.host}")
+    @Value("${spring.smokescreen.host}")
     private String smokescreenHost;
 
-    @Value("${smokescreen.port}")
+    @Value("${spring.smokescreen.port}")
     private int smokescreenPort;
 
     @Bean

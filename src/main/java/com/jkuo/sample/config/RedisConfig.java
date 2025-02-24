@@ -3,13 +3,11 @@ package com.jkuo.sample.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 
 @Configuration
-@ConditionalOnMissingBean(RedissonClient.class)
 public class RedisConfig {
 
     @Value("${spring.redis.host}")
