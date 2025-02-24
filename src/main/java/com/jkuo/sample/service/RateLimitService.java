@@ -17,12 +17,13 @@ public class RateLimitService {
     private Duration rateLimitDuration = Duration.ofMinutes(1);
     private Duration rateLimitExpiration = Duration.ofMinutes(2);
 
-    @Autowired
-    public RateLimitService(RedissonClient redissonClient) {
+    @Autowired(required = false)
+    public RateLimitService(@Autowired(required = false) RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
     }
 
-    public RateLimitService(RedissonClient redissonClient, int rateLimit, Duration rateLimitDuration,
+    public RateLimitService(
+            @Autowired(required = false) RedissonClient redissonClient, int rateLimit, Duration rateLimitDuration,
             Duration rateLimitExpiration) {
         this.redissonClient = redissonClient;
         this.rateLimit = rateLimit;
@@ -36,5 +37,9 @@ public class RateLimitService {
         rateLimiter.trySetRate(RateType.OVERALL, rateLimit, rateLimitDuration);
         redissonClient.getBucket(key).expire(rateLimitExpiration);
         return rateLimiter;
+    }
+
+    public long getTimeToLive(String clientIp) {
+        return redissonClient.getBucket("rate-limiter:" + clientIp).remainTimeToLive();
     }
 }

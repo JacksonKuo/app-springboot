@@ -16,7 +16,8 @@ import org.springframework.http.HttpHeaders;
 @RequestMapping(value = "/smokescreen")
 public class SmokescreenController {
 
-    // doesn't need @Autowired annotation since only one constructor and autowiring is implicit
+    // doesn't need @Autowired annotation since only one constructor and autowiring
+    // is implicit
     private final WebProxy webProxy;
 
     public SmokescreenController(WebProxy webProxy) {
@@ -24,33 +25,32 @@ public class SmokescreenController {
     }
 
     @GetMapping(value = "", produces = "text/html")
-	public String smokescreenForm() {
-		return """
-        <html>
-        <head>
-            <title>Smokescreen Demo</title>
-            <script src="https://bakacore.com:8087/smokescreen" async defer></script>
-        </head>
-        <body>
-            <form action="/smokescreen" method="POST">
-                <label for="url">URL:</label>
-                <input type="text" id="url" name="url" required />
-                <br />
-                <input type="submit" value="Submit" />
-            </form>
-        </body>
-        </html>
-        """;
-	}
+    public String smokescreenForm() {
+        return """
+                <html>
+                <head>
+                    <title>Smokescreen Demo</title>
+                    <script src="https://bakacore.com:8087/smokescreen" async defer></script>
+                </head>
+                <body>
+                    <form action="/smokescreen" method="POST">
+                        <label for="url">URL:</label>
+                        <input type="text" id="url" name="url" required />
+                        <br />
+                        <input type="submit" value="Submit" />
+                    </form>
+                </body>
+                </html>
+                """;
+    }
 
     @PostMapping(value = "")
-    public Mono<ResponseEntity<String>> retrieveUrl(@RequestParam String url) {
+    public Mono<ResponseEntity<String>> retrieveUrl(@RequestParam("url") String url) {
         return webProxy.retrieveUrl(url)
-            .map(rawHtml -> ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_TYPE, "text/plain")
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
-                    .body(rawHtml)
-            );
+                .map(rawHtml -> ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_TYPE, "text/plain")
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline")
+                        .body(rawHtml));
     }
 
 }

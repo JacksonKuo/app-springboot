@@ -24,7 +24,9 @@ dependencies {
 	implementation("com.google.code.gson:gson")
 	implementation("org.redisson:redisson:3.44.0")
 	implementation("com.twilio.sdk:twilio:10.6.8")
-
+	
+	testImplementation("org.testcontainers:testcontainers:1.20.5")
+	testImplementation("org.mockito:mockito-core")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
