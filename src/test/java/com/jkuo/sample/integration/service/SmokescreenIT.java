@@ -34,7 +34,6 @@ public class SmokescreenIT {
 
     @BeforeAll
     static void beforeAll() {
-
         try {
             smokescreen.start();
             Integer smokescreenPort = smokescreen.getMappedPort(4750);

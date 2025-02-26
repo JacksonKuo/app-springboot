@@ -12,10 +12,7 @@ test:
 #redis-cli shutdown
 
 build:
-	redis-server --daemonize yes 
-	sleep 1
-	./gradlew build -Dspring.profiles.active=localk8
-	redis-cli shutdown
+	./gradlew build -x test -Dspring.profiles.active=localk8
 
 docker:
 	docker build -t springboot --build-arg BASE_IMAGE="openjdk:17-jdk-slim" .

@@ -24,6 +24,7 @@ dependencies {
 	implementation("com.google.code.gson:gson")
 	implementation("org.redisson:redisson:3.44.0")
 	implementation("com.twilio.sdk:twilio:10.6.8")
+	implementation("com.googlecode.libphonenumber:libphonenumber:8.13.55")
 	
 	testImplementation("org.testcontainers:testcontainers:1.20.5")
 	testImplementation("org.mockito:mockito-core")
