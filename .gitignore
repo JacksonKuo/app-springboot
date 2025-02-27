@@ -35,7 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
-!.vscode/tasks.json
+!.vscode/tasks.template.json
 
 ### Helm ###
 *.tgz
