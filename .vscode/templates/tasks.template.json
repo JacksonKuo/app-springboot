@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Gradle build",
+            "command": "./gradlew build",
+            "options": {
+                "env": {
+                    "HCAPTCHA_SECRET": "value1",
+                    "VERIFY_SERVICE_SID": "value2",
+                    "TWILIO_ACCOUNT_SID": "value3",
+                    "TWILIO_AUTH_TOKEN": "value4",
+                    "TWILIO_TEST_ACCOUNT_SID": "value5",
+                    "TWILIO_TEST_AUTH_TOKEN": "value6"
+                }
+            },
+            "problemMatcher": "$gradle"
+        },
+        {
+            "type": "shell",
+            "label": "Gradle test",
+            "command": "./gradlew test",
+            "options": {
+                "env": {
+                    "HCAPTCHA_SECRET": "value1",
+                    "VERIFY_SERVICE_SID": "value2",
+                    "TWILIO_ACCOUNT_SID": "value3",
+                    "TWILIO_AUTH_TOKEN": "value4",
+                    "TWILIO_TEST_ACCOUNT_SID": "value5",
+                    "TWILIO_TEST_AUTH_TOKEN": "value6"
+                }
+            },
+            "problemMatcher": "$gradle"
+        }
+    ]
+}

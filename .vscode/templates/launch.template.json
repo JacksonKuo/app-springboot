@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Run Spring Boot Tests",
+            "mainClass": "com.jkuo.sample.SampleApplication",
+            "env": {
+                "HCAPTCHA_SECRET": "value1",
+                "VERIFY_SERVICE_SID": "value2",
+                "TWILIO_ACCOUNT_SID": "value3",
+                "TWILIO_AUTH_TOKEN": "value4",
+                "TWILIO_TEST_ACCOUNT_SID": "value5",
+                "TWILIO_TEST_AUTH_TOKEN": "value6"
+            }
+        }
+    ]
+}
