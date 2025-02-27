@@ -28,9 +28,6 @@ public class MfaService {
     @Value("${twilio.auth.token}")
     private String TWILIO_AUTH_TOKEN;
 
-    public MfaService() {
-    }
-
     public Verification sendVerificationCode(String phone) {
         try {
             Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
