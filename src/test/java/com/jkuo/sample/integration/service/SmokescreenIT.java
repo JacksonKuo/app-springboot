@@ -29,6 +29,7 @@ public class SmokescreenIT {
     public static final DockerImageName SMOKESCREEN_IMAGE = DockerImageName
             .parse("ghcr.io/jacksonkuo/smokescreen:latest");
 
+    @SuppressWarnings("resource")
     static GenericContainer<?> smokescreen = new GenericContainer<>(SMOKESCREEN_IMAGE)
             .withExposedPorts(4750);
 

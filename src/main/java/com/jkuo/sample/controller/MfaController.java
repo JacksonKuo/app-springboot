@@ -44,13 +44,11 @@ public class MfaController {
 
     @PostMapping("/mfa")
     public ResponseEntity<String> sendVerificationCode(@RequestParam String phone) {
-        String verifiedPhone = mfaService.checkPhoneNumber(phone);
-
-        if (verifiedPhone == null) {
-            return ResponseEntity.badRequest().body("Invalid phone number");
-        }
         try {
-            Verification verification = mfaService.sendVerificationCode(verifiedPhone);
+            Verification verification = mfaService.sendVerificationCode(phone);
+            if (verification == null) {
+                return ResponseEntity.badRequest().body("Invalid phone number");
+            }
             if (verification.getStatus().equals("pending")) {
                 return ResponseEntity.status(HttpStatus.FOUND)
                         .location(URI.create("/mfa/verify"))

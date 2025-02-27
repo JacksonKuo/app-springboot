@@ -28,10 +28,18 @@ public class MfaService {
     @Value("${twilio.auth.token}")
     private String TWILIO_AUTH_TOKEN;
 
+    public MfaService() {
+    }
+
     public Verification sendVerificationCode(String phone) {
+        String verifiedPhone = checkPhoneNumber(phone);
+
+        if (verifiedPhone == null) {
+            return null;
+        }
         try {
             Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-            Verification verification = Verification.creator(VERIFY_SERVICE_SID, phone, "sms").create();
+            Verification verification = Verification.creator(VERIFY_SERVICE_SID, verifiedPhone, "sms").create();
 
             return verification;
         } catch (Exception e) {

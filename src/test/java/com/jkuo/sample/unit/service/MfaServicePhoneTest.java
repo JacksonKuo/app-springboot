@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.jkuo.sample.service.MfaService;
 
-@Tag("integration")
+@Tag("unit")
 @SpringJUnitConfig
 @ContextConfiguration(classes = { MfaService.class })
 @ActiveProfiles("local")
-public class MfaServiceTest {
+public class MfaServicePhoneTest {
 
     @Autowired
     MfaService mfaService;
@@ -48,4 +48,5 @@ public class MfaServiceTest {
         // assert
         assertNull(result);
     }
+
 }

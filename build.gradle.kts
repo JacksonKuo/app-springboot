@@ -26,6 +26,7 @@ dependencies {
 	implementation("com.twilio.sdk:twilio:10.6.8")
 	implementation("com.googlecode.libphonenumber:libphonenumber:8.13.55")
 	
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.0")
 	testImplementation("org.testcontainers:testcontainers:1.20.5")
 	testImplementation("org.mockito:mockito-core")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

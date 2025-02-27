@@ -28,6 +28,7 @@ public class RateLimitServiceIT {
     public static final DockerImageName REDIS_IMAGE = DockerImageName
             .parse("redis:latest");
 
+    @SuppressWarnings("resource")
     static GenericContainer<?> redis = new GenericContainer<>(REDIS_IMAGE)
             .withExposedPorts(6379);
 
