@@ -3,11 +3,17 @@
 version: 2.1
 jobs:
   test-java:
-    docker:
-      - image: cimg/openjdk:17.0
-    - machine: true
+    machine: true  # Uses the default machine executor (Ubuntu-based VM)
     steps:
       - checkout
+      - run:
+          name: Install Java 17
+          command: |
+            sudo apt update
+            sudo apt install -y openjdk-17-jdk
+      - run:
+          name: Verify Java Installation
+          command: java -version
       - run:
           name: Calculate cache key
           command: |-
