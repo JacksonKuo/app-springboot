@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.4.1"
 	id("io.spring.dependency-management") version "1.1.7"
+	jacoco
 }
 
 group = "com.jkuo"
@@ -26,7 +27,7 @@ dependencies {
 	implementation("com.twilio.sdk:twilio:10.6.8")
 	implementation("com.googlecode.libphonenumber:libphonenumber:8.13.55")
 	
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.0")
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("org.testcontainers:testcontainers:1.20.5")
 	testImplementation("org.mockito:mockito-core")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -35,4 +36,16 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+	reports {
+        xml.required = false
+        csv.required = true
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+    }
 }
