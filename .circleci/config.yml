@@ -1,0 +1,33 @@
+# This config was automatically generated from your source code
+# Stacks detected: cicd:github-actions:.github/workflows,deps:java:.,tool:gradle:
+version: 2.1
+jobs:
+  test-java:
+    machine: true
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: Install Java 17
+          command: |
+            sudo apt update
+            sudo apt install -y openjdk-17-jdk
+      - run:
+          name: Verify Java Installation
+          command: java -version
+      - restore_cache:
+          key: cache-{{ checksum "build.gradle.kts" }}
+      - run:
+          command: ./gradlew check
+      - store_test_results:
+          path: build/test-results
+      - save_cache:
+          key: cache-{{ checksum "build.gradle.kts" }}
+          paths:
+            - ~/.gradle/caches
+      - store_artifacts:
+          path: build/reports
+workflows:
+  build-and-test:
+    jobs:
+      - test-java
