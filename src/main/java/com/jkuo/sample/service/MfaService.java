@@ -33,7 +33,6 @@ public class MfaService {
 
     public Verification sendVerificationCode(String phone) {
         String verifiedPhone = checkPhoneNumber(phone);
-
         if (verifiedPhone == null) {
             return null;
         }
@@ -50,10 +49,14 @@ public class MfaService {
     }
 
     public VerificationCheck verifyCode(String code, String phone) {
+        String verifiedPhone = checkPhoneNumber(phone);
+        if (verifiedPhone == null) {
+            return null;
+        }
         try {
             Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
             VerificationCheck verificationCheck = VerificationCheck.creator(VERIFY_SERVICE_SID)
-                    .setTo(phone)
+                    .setTo(verifiedPhone)
                     .setCode(code)
                     .create();
             return verificationCheck;
