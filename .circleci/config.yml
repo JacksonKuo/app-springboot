@@ -2,7 +2,7 @@
 # Stacks detected: cicd:github-actions:.github/workflows,deps:java:.,tool:gradle:
 version: 2.1
 jobs:
-  test-java:
+  gradle-test:
     machine: true
     resource_class: medium
     steps:
@@ -30,4 +30,4 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-java
+      - gradle-test
