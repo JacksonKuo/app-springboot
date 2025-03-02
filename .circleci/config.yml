@@ -3,7 +3,8 @@
 version: 2.1
 jobs:
   test-java:
-    machine: true  # Uses the default machine executor (Ubuntu-based VM)
+    machine: true
+      resource_class: medium
     steps:
       - checkout
       - run:
