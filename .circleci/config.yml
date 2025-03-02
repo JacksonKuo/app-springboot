@@ -16,13 +16,13 @@ jobs:
           name: Verify Java Installation
           command: java -version
       - restore_cache:
-          key: cache-{{ checksum "build.gradle" }}
+          key: cache-{{ checksum "build.gradle.kts" }}
       - run:
           command: ./gradlew check
       - store_test_results:
           path: build/test-results
       - save_cache:
-          key: cache-{{ checksum "build.gradle" }}
+          key: cache-{{ checksum "build.gradle.kts" }}
           paths:
             - ~/.gradle/caches
       - store_artifacts:
