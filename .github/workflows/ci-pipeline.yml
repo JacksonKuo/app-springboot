@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'springboot-chart/**'
+      - 'src/**'
+      - '**/*.kts'
 
 jobs:
   build:
