@@ -25,7 +25,7 @@ dependencies {
 	implementation("com.google.code.gson:gson")
 	implementation("org.redisson:redisson:3.45.0")
 	implementation("com.twilio.sdk:twilio:10.6.10")
-	implementation("com.googlecode.libphonenumber:libphonenumber:8.13.55")
+	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.0")
 	
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("org.testcontainers:testcontainers:1.20.6")
