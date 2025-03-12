@@ -24,7 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.google.code.gson:gson")
 	implementation("org.redisson:redisson:3.45.0")
-	implementation("com.twilio.sdk:twilio:10.6.10")
+	implementation("com.twilio.sdk:twilio:10.7.0")
 	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.0")
 	
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
