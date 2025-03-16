@@ -26,6 +26,7 @@ dependencies {
 	implementation("org.redisson:redisson:3.45.0")
 	implementation("com.twilio.sdk:twilio:10.7.0")
 	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.0")
+	implementation("org.springframework.security:spring-security-web:6.3.3")
 	
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("org.testcontainers:testcontainers:1.20.6")
