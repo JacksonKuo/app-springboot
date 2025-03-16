@@ -50,6 +50,8 @@ tasks.jacocoTestReport {
     }
 }
 
+/* 
 dependencyLocking {
    lockAllConfigurations()
 }
+*/
