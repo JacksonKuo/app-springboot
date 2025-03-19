@@ -8,6 +8,7 @@ on:
       - 'springboot-chart/**'
       - 'src/**'
       - '**/*.kts'
+      - 'gradle.lockfile'
 
 jobs:
   build:
@@ -22,6 +23,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Generate and submit dependency graph
+      uses: gradle/actions/dependency-submission@v4
+
     - name: Cache Gradle dependencies
       uses: actions/cache@v4
       with:
@@ -34,6 +38,9 @@ jobs:
       run: |
         chmod +x ./gradlew
         ./gradlew build -x test
+
+    - name: Generate and submit dependency graph
+      uses: gradle/actions/dependency-submission@v4
 
     - name: Build Helm Chart
       run: | 
