@@ -23,9 +23,6 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@v4
-
     - name: Cache Gradle dependencies
       uses: actions/cache@v4
       with:
