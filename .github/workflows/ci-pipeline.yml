@@ -9,7 +9,7 @@ on:
       - 'src/**'
       - '**/*.kts'
       - 'gradle.lockfile'
-      - '.github/workflows/ci-pipeline.yml
+      - '.github/workflows/ci-pipeline.yml'
 
 jobs:
   build:
