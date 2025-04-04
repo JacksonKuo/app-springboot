@@ -117,7 +117,7 @@ jobs:
           if test -d /etc/letsencrypt/live/bakacore.com; then
             echo 'Certbot already run...'
           else
-            echo 'Running certbot...
+            echo 'Running certbot...'
             apt-get -y install certbot
             certbot certonly --standalone -d bakacore.com --agree-tos --register-unsafely-without-email
             sudo openssl pkcs12 -export \
