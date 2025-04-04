@@ -13,7 +13,7 @@ public class HelloController {
 	@GetMapping("/")
 	public String index() {
 		logger.info("Received request for '/' endpoint");
-		return "Greetings user: " + (int) (Math.random() * 10);
+		return "Greetings random user: " + (int) (Math.random() * 10);
 	}
 
 }
