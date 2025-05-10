@@ -15,5 +15,4 @@ public class HelloController {
 		logger.info("Received request for '/' endpoint");
 		return "Greetings random user 1: " + (int) (Math.random() * 100);
 	}
-
 }

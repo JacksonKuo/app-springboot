@@ -48,5 +48,4 @@ public class CaptchaController {
             return "Captcha submission failed!";
         }
     }
-
 }

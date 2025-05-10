@@ -17,8 +17,8 @@ public class SampleApplication {
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SampleApplication.class, args);
 
-		//Cat cat = context.getBean("BlueCat", Cat.class);
-		//System.out.println(cat.getName());
+		// Cat cat = context.getBean("BlueCat", Cat.class);
+		// System.out.println(cat.getName());
 
 		Person person = context.getBean("Alice", Person.class);
 		System.out.println(person.getCat().getName());
@@ -35,8 +35,6 @@ public class SampleApplication {
 			for (String beanName : beanNames) {
 				System.out.println(beanName);
 			}
-
 		};
 	}
-
 }
