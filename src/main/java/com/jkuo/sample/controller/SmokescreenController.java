@@ -30,7 +30,7 @@ public class SmokescreenController {
                 <html>
                 <head>
                     <title>Smokescreen Demo</title>
-                    <script src="https://bakacore.com:8087/smokescreen" async defer></script>
+                    <script src="https://bakacore.com:8443/smokescreen" async defer></script>
                 </head>
                 <body>
                     <form action="/smokescreen" method="POST">

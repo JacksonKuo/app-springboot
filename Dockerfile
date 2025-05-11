@@ -6,7 +6,7 @@ COPY build/libs/sample-0.0.1-SNAPSHOT.jar /app
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 8087
+EXPOSE 8443
 
 ENV JAVA_OPTS="-Xms128m -Xmx256m"
 ENV SPRING_PROFILE="prod"

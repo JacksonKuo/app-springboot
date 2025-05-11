@@ -19,7 +19,7 @@ docker:
 	docker build -t smokescreen -f /Users/jacksonkuo/workspace/app-smokescreen/Dockerfile /Users/jacksonkuo/workspace/app-smokescreen/
 
 cluster:
-	k3d cluster create local-cluster --port 8087:8087@loadbalancer
+	k3d cluster create local-cluster --port 8443:8443@loadbalancer
 
 secrets:
 	kubectl delete secret hcaptcha-secret --ignore-not-found

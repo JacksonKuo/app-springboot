@@ -28,7 +28,7 @@ public class MfaController {
                 <html>
                 <head>
                     <title>Twilio MFA Demo</title>
-                    <script src="https://bakacore.com:8087/mfa" async defer></script>
+                    <script src="https://bakacore.com:8443/mfa" async defer></script>
                 </head>
                 <body>
                     <form action="/mfa" method="POST">
@@ -67,7 +67,7 @@ public class MfaController {
                 <html>
                 <head>
                     <title>Twilio MFA Demo</title>
-                    <script src="https://bakacore.com:8087/mfa/verify" async defer></script>
+                    <script src="https://bakacore.com:8443/mfa/verify" async defer></script>
                 </head>
                 <body>
                     <form action="/mfa/verify" method="POST">
