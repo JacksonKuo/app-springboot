@@ -18,7 +18,7 @@ dependencies {
 	implementation("org.springframework:spring-context")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.google.code.gson:gson")
-	implementation("org.redisson:redisson:3.46.0")
+	implementation("org.redisson:redisson:3.47.0")
 	implementation("com.twilio.sdk:twilio:10.9.0")
 	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.5")
 	
