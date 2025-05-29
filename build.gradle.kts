@@ -23,7 +23,7 @@ dependencies {
 	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.5")
 	
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
-	testImplementation("org.testcontainers:testcontainers:1.21.0")
+	testImplementation("org.testcontainers:testcontainers:1.21.1")
 	testImplementation("org.mockito:mockito-core")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
