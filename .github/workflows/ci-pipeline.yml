@@ -82,9 +82,9 @@ jobs:
         echo "$DROPLET_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
 
         ssh -o StrictHostKeyChecking=no root@$DROPLET_IP "
-          echo 'Install JDK...'
-          apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
-          echo 'Downloading the latest JAR...'
+          # echo 'Install JDK...'
+          # apt -qq update && apt-get -qq install -y openjdk-17-jdk-headless
+          # echo 'Downloading the latest JAR...'
 
           echo 'Install Helm 3...'
           curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3

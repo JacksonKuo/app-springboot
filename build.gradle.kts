@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.4.5"
+	id("org.springframework.boot") version "3.5.4"
 	id("io.spring.dependency-management") version "1.1.7"
 	jacoco
 }
@@ -19,8 +19,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.google.code.gson:gson")
 	implementation("org.redisson:redisson:3.46.0")
-	implementation("com.twilio.sdk:twilio:10.9.0")
-	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.5")
+	implementation("com.twilio.sdk:twilio:10.9.2")
+	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.12")
 	
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testImplementation("org.testcontainers:testcontainers:1.21.3")
@@ -34,6 +34,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
@@ -44,11 +45,12 @@ tasks.test {
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
 	reports {
-        xml.required = false
-        csv.required = true
-        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+        xml.required.set(false)
+        csv.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
 }
+
 
 /* 
 dependencyLocking {
