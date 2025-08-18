@@ -34,6 +34,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
@@ -44,11 +45,12 @@ tasks.test {
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
 	reports {
-        xml.required = false
-        csv.required = true
-        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
+        xml.required.set(false)
+        csv.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
 }
+
 
 /* 
 dependencyLocking {
