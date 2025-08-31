@@ -3,7 +3,7 @@ FROM ${BASE_IMAGE}
 
 WORKDIR /app
 COPY build/libs/sample-0.0.1-SNAPSHOT.jar /app
-COPY --chmod=755 entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 #RUN chmod +x /entrypoint.sh
 
 EXPOSE 8443
