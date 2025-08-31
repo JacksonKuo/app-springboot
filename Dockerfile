@@ -1,10 +1,10 @@
-ARG BASE_IMAGE=openjdk:17-jdk-alpine
+ARG BASE_IMAGE=cgr.dev/chainguard/jdk:latest-dev
 FROM ${BASE_IMAGE}
 
 WORKDIR /app
 COPY build/libs/sample-0.0.1-SNAPSHOT.jar /app
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY --chmod=755 entrypoint.sh /entrypoint.sh
+#RUN chmod +x /entrypoint.sh
 
 EXPOSE 8443
 

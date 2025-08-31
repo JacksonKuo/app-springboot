@@ -9,6 +9,7 @@ on:
       - 'src/**'
       - '**/*.kts'
       - 'gradle.lockfile'
+      - Dockerfile
       - '.github/workflows/ci-pipeline.yml'
 
 jobs:
