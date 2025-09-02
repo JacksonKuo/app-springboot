@@ -15,7 +15,8 @@ build:
 	./gradlew build -x test -Dspring.profiles.active=localk8
 
 docker:
-	docker build -t springboot --build-arg BASE_IMAGE="openjdk:17-jdk-slim" .
+# docker build -t springboot --build-arg BASE_IMAGE="openjdk:17-jdk-slim" .
+	docker build -t springboot .
 	docker build -t smokescreen -f /Users/jacksonkuo/workspace/app-smokescreen/Dockerfile /Users/jacksonkuo/workspace/app-smokescreen/
 
 cluster:

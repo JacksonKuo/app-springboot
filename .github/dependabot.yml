@@ -4,6 +4,19 @@ updates:
     directory: "/" 
     schedule:
       interval: "daily"
+    groups:
+      springboot:
+        applies-to: version-updates
+        patterns:
+          - "com.google.code.gson:gson"
+          - "org.redisson:redisson"
+          - "com.twilio.sdk:twilio"
+          - "com.googlecode.libphonenumber:libphonenumber"
+          - "org.testcontainers:testcontainers"
+          - "org.springframework.boot:*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: "github-actions" 
     directory: "/" 
     schedule:
