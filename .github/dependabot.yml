@@ -12,6 +12,7 @@ updates:
           - "org.redisson:redisson"
           - "com.twilio.sdk:twilio"
           - "com.googlecode.libphonenumber:libphonenumber"
+          - "org.testcontainers:testcontainers"
         update-types:
           - "minor"
           - "patch"
