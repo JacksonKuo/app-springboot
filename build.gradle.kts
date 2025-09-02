@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.5.4"
+	id("org.springframework.boot") version "3.5.5"
 	id("io.spring.dependency-management") version "1.1.7"
 	jacoco
 }
@@ -18,12 +18,12 @@ dependencies {
 	implementation("org.springframework:spring-context")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.google.code.gson:gson")
-	implementation("org.redisson:redisson:3.46.0")
+	implementation("org.redisson:redisson:3.51.0")
 	implementation("com.twilio.sdk:twilio:10.9.2")
-	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.12")
+	implementation("com.googlecode.libphonenumber:libphonenumber:9.0.13")
 	
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
-	testImplementation("org.testcontainers:testcontainers:1.21.0")
+	testImplementation("org.testcontainers:testcontainers:1.21.3")
 	testImplementation("org.mockito:mockito-core")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
