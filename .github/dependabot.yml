@@ -13,6 +13,7 @@ updates:
           - "com.twilio.sdk:twilio"
           - "com.googlecode.libphonenumber:libphonenumber"
           - "org.testcontainers:testcontainers"
+          - "org.springframework.boot:*"
         update-types:
           - "minor"
           - "patch"
