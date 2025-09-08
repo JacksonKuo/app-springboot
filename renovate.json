@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
   ],
   "packageRules": [
     {
@@ -17,9 +18,7 @@
       ]
     },
     {
-      "extends": [
-        "helpers:pinGitHubActionDigestsToSemVer"
-      ],
+      "matchDepTypes": ["action"],
       "extractVersion": "^(?<version>v?\\d+\\.\\d+\\.\\d+)$",
       "versioning": "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+)\\.(?<patch>\\d+))?$"
     }
