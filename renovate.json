@@ -1,11 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests"
+    "config:recommended"
   ],
   "packageRules": [
     {
+      "extends": [
+        "helpers:pinGitHubActionDigests"
+      ],
+      "extractVersion": "^(?<version>v?\\d+\\.\\d+\\.\\d+)$",
+      "versioning": "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+)\\.(?<patch>\\d+))?$",   
       "groupName": "all dependencies",
       "groupSlug": "all-major-minor-patch",
       "matchPackageNames": [
@@ -15,10 +19,8 @@
         "major",
         "minor",
         "patch"
-      ],
-      "extractVersion": "^(?<version>v?\\d+\\.\\d+\\.\\d+)$",
-      "versioning": "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+)\\.(?<patch>\\d+))?$"
-    }    
+      ]
+    }
   ]
 }
 
