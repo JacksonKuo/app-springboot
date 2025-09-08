@@ -5,23 +5,22 @@
   ],
   "packageRules": [
     {
-      "groupName": "all dependencies",
-      "groupSlug": "all-major-minor-patch",
-      "matchPackageNames": [
-        "*"
-      ],
-      "matchUpdateTypes": [
-        "major",
-        "minor",
-        "patch"
-      ]
-    },
-    {
       "extends": [
         "helpers:pinGitHubActionDigests"
       ],
       "extractVersion": "^(?<version>v?\\d+\\.\\d+\\.\\d+)$",
       "versioning": "regex:^v?(?<major>\\d+)(\\.(?<minor>\\d+)\\.(?<patch>\\d+))?$"
+    },
+    {
+      "groupName": "all dependencies",
+      "groupSlug": "all-minor-patch",
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ]
     }
   ]
 }
