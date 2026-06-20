@@ -16,9 +16,9 @@ service:
 
 enableVolumeMounts: true
 
-enableRedis: true
+enableRedis: false
 
-enableSmokescreen: true
+enableSmokescreen: false
 
 springProfile: prod
 
