@@ -100,6 +100,13 @@ jobs:
             curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--disable metrics-server --disable traefik' sh -
           fi
 
+          echo 'Check K3s cert expiry...'
+          if ! openssl x509 -checkend 2592000 -noout -in /var/lib/rancher/k3s/server/tls/client-admin.crt; then
+            echo 'K3s certs expiring within 30 days, restarting to rotate...'
+            systemctl restart k3s
+            sleep 15
+          fi
+
           echo 'Download Helm chart...'
           curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
