@@ -1,3 +1,4 @@
+{{- if .Values.enableRedis }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,3 +19,4 @@ spec:
           command: ["redis-server", "--maxmemory", "50mb"]
           ports:
             - containerPort: 6379
+{{- end }}

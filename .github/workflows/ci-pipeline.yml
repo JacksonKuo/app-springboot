@@ -107,6 +107,9 @@ jobs:
             sleep 15
           fi
 
+          echo 'Install weekly K3s cert-rotation cron (renews between deploys)...'
+          echo '0 4 * * 0 root openssl x509 -checkend 2592000 -noout -in /var/lib/rancher/k3s/server/tls/client-admin.crt || systemctl restart k3s' > /etc/cron.d/k3s-cert-rotate
+
           echo 'Download Helm chart...'
           curl -LO https://github.com/JacksonKuo/app-springboot/releases/download/latest/springboot-chart-0.0.1.tgz
           export KUBECONFIG=/etc/rancher/k3s/k3s.yaml

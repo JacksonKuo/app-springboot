@@ -16,6 +16,10 @@ service:
 
 enableVolumeMounts: true
 
+enableRedis: true
+
+enableSmokescreen: true
+
 springProfile: prod
 
 smokescreenImage:

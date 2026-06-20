@@ -1,3 +1,4 @@
+{{- if .Values.enableSmokescreen }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,3 +9,4 @@ spec:
       targetPort: 4750
   selector:
     app: smokescreen
+{{- end }}
