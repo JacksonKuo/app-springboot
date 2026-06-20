@@ -114,20 +114,16 @@ jobs:
           kubectl delete secret twilio-auth-token --ignore-not-found
           kubectl create secret generic twilio-auth-token --from-literal=TWILIO_AUTH_TOKEN='$TWILIO_AUTH_TOKEN'
 
-          echo 'Check certbot...'
-          if test -d /etc/letsencrypt/live/bakacore.com; then
-            echo 'Certbot already run...'
-          else
+          echo 'Ensure certbot is installed and cert exists...'
+          apt-get -y install certbot
+          if ! test -d /etc/letsencrypt/live/bakacore.com; then
             echo 'Running certbot...'
-            apt-get -y install certbot
             certbot certonly --standalone -d bakacore.com --agree-tos --register-unsafely-without-email
-            sudo openssl pkcs12 -export \
-              -in /etc/letsencrypt/live/bakacore.com/fullchain.pem \
-              -inkey /etc/letsencrypt/live/bakacore.com/privkey.pem \
-              -out /etc/letsencrypt/live/bakacore.com/keystore.p12 \
-              -name springboot \
-              -password pass:foobar
           fi
+          # renew if due (no-op until ~30 days before expiry), then make the
+          # private key readable by the non-root chainguard user in the pod
+          certbot renew --quiet
+          chmod 644 /etc/letsencrypt/live/bakacore.com/privkey.pem
 
           echo 'Deploy Spring Boot service...'
           helm upgrade --install springboot springboot-chart-0.0.1.tgz
