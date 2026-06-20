@@ -130,6 +130,10 @@ jobs:
           # renew if due (no-op until ~30 days before expiry), then make the
           # private key readable by the non-root chainguard user in the pod
           certbot renew --quiet
+          # let the non-root pod user traverse into live/ and archive/ (certbot
+          # locks these to 0700) and read the private key
+          chmod 755 /etc/letsencrypt/live 
+          chmod 755 /etc/letsencrypt/archive
           chmod 644 /etc/letsencrypt/live/bakacore.com/privkey.pem
 
           echo 'Deploy Spring Boot service...'
