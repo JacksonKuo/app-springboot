@@ -43,15 +43,22 @@ spec:
                   key: TWILIO_AUTH_TOKEN
           volumeMounts:
             {{- if .Values.enableVolumeMounts }}
-            - name: keystore-volume
-              mountPath: /etc/letsencrypt/live/bakacore.com
+            - name: le-live
+              mountPath: /etc/letsencrypt/live
+              readOnly: true
+            - name: le-archive
+              mountPath: /etc/letsencrypt/archive
               readOnly: true
             {{- end }}
       {{- if .Values.enableVolumeMounts }}
       volumes:
-        - name: keystore-volume
+        - name: le-live
           hostPath:
-            path: /etc/letsencrypt/live/bakacore.com
+            path: /etc/letsencrypt/live
+            type: Directory
+        - name: le-archive
+          hostPath:
+            path: /etc/letsencrypt/archive
             type: Directory
       {{- end }}
 
