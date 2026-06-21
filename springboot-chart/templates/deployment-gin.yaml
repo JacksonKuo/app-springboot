@@ -1,0 +1,42 @@
+{{- if .Values.enableAppGin }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-gin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-gin
+  template:
+    metadata:
+      labels:
+        app: app-gin
+    spec:
+      containers:
+        - name: app-gin
+          image: "{{ .Values.ginImage.repository }}:{{ .Values.ginImage.tag }}"
+          imagePullPolicy: "{{ .Values.ginImage.pullPolicy }}"
+          ports:
+            - containerPort: 8886
+          volumeMounts:
+            {{- if .Values.enableVolumeMounts }}
+            - name: le-live
+              mountPath: /etc/letsencrypt/live
+              readOnly: true
+            - name: le-archive
+              mountPath: /etc/letsencrypt/archive
+              readOnly: true
+            {{- end }}
+      {{- if .Values.enableVolumeMounts }}
+      volumes:
+        - name: le-live
+          hostPath:
+            path: /etc/letsencrypt/live
+            type: Directory
+        - name: le-archive
+          hostPath:
+            path: /etc/letsencrypt/archive
+            type: Directory
+      {{- end }}
+{{- end }}

@@ -1,0 +1,13 @@
+{{- if .Values.enableAppGin }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-gin
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8886
+      targetPort: 8886
+  selector:
+    app: app-gin
+{{- end }}

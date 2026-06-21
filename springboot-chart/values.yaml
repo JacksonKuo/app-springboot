@@ -20,9 +20,16 @@ enableRedis: false
 
 enableSmokescreen: false
 
+enableAppGin: true
+
 springProfile: prod
 
 smokescreenImage:
   repository: ghcr.io/jacksonkuo/smokescreen
+  tag: latest
+  pullPolicy: Always
+
+ginImage:
+  repository: ghcr.io/jacksonkuo/app-gin
   tag: latest
   pullPolicy: Always
