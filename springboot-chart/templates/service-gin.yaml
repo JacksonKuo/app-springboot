@@ -6,8 +6,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 8886
-      targetPort: 8886
+    - port: 2096
+      targetPort: 2096
   selector:
     app: app-gin
 {{- end }}

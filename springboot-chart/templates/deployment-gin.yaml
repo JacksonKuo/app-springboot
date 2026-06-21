@@ -18,7 +18,7 @@ spec:
           image: "{{ .Values.ginImage.repository }}:{{ .Values.ginImage.tag }}"
           imagePullPolicy: "{{ .Values.ginImage.pullPolicy }}"
           ports:
-            - containerPort: 8886
+            - containerPort: 2096
           volumeMounts:
             {{- if .Values.enableVolumeMounts }}
             - name: le-live
