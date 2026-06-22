@@ -19,6 +19,29 @@ spec:
           imagePullPolicy: "{{ .Values.ginImage.pullPolicy }}"
           ports:
             - containerPort: 2096
+          env:
+            - name: OKTA_OAUTH2_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: okta-creds
+                  key: OKTA_OAUTH2_ISSUER
+            - name: OKTA_OAUTH2_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: okta-creds
+                  key: OKTA_OAUTH2_CLIENT_ID
+            - name: OKTA_OAUTH2_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: okta-creds
+                  key: OKTA_OAUTH2_CLIENT_SECRET
+            - name: OKTA_OAUTH2_SESSION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: okta-creds
+                  key: OKTA_OAUTH2_SESSION_KEY
+            - name: OKTA_REDIRECT_URI
+              value: "https://bakacore.com:2096/authorization-code/callback"
           volumeMounts:
             {{- if .Values.enableVolumeMounts }}
             - name: le-live

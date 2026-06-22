@@ -123,6 +123,8 @@ jobs:
           kubectl create secret generic twilio-account-sid --from-literal=TWILIO_ACCOUNT_SID='$TWILIO_ACCOUNT_SID'
           kubectl delete secret twilio-auth-token --ignore-not-found
           kubectl create secret generic twilio-auth-token --from-literal=TWILIO_AUTH_TOKEN='$TWILIO_AUTH_TOKEN'
+          kubectl delete secret okta-creds --ignore-not-found
+          kubectl create secret generic okta-creds --from-literal=OKTA_OAUTH2_ISSUER='$OKTA_OAUTH2_ISSUER' --from-literal=OKTA_OAUTH2_CLIENT_ID='$OKTA_OAUTH2_CLIENT_ID' --from-literal=OKTA_OAUTH2_CLIENT_SECRET='$OKTA_OAUTH2_CLIENT_SECRET' --from-literal=OKTA_OAUTH2_SESSION_KEY='$OKTA_OAUTH2_SESSION_KEY'
 
           echo 'Ensure certbot is installed and cert exists...'
           apt-get -y install certbot
@@ -150,6 +152,10 @@ jobs:
         VERIFY_SERVICE_SID: ${{ secrets.VERIFY_SERVICE_SID }}
         TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
         TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+        OKTA_OAUTH2_ISSUER: ${{ secrets.OKTA_OAUTH2_ISSUER }}
+        OKTA_OAUTH2_CLIENT_ID: ${{ secrets.OKTA_OAUTH2_CLIENT_ID }}
+        OKTA_OAUTH2_CLIENT_SECRET: ${{ secrets.OKTA_OAUTH2_CLIENT_SECRET }}
+        OKTA_OAUTH2_SESSION_KEY: ${{ secrets.OKTA_OAUTH2_SESSION_KEY }}
 
 
     
